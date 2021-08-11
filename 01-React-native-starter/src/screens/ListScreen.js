@@ -33,6 +33,7 @@ const ListScreen = function () {
 	];
 	return (
 		<FlatList
+			keyExtractor={friend => friend.name}
 			data={friends}
 			renderItem={({ item }) => <Text>{item.name}</Text>}
 		></FlatList>
