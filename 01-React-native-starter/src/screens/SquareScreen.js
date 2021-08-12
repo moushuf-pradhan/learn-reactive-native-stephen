@@ -12,9 +12,22 @@ const SquareScreen = function () {
 
 	// Set color
 	const setColor = (color, changeBy) => {
-		if (color === 'red') {
-			if (red + changeBy > 255 || red + changeBy < 0) return;
-			setRed(red + changeBy);
+		switch (color) {
+			case 'red':
+				red + changeBy > 255 || red + changeBy < 0
+					? null
+					: setRed(red + changeBy);
+				break;
+			case 'green':
+				green + changeBy > 255 || green + changeBy < 0
+					? null
+					: setGreen(green + changeBy);
+				break;
+			case 'blue':
+				blue + changeBy > 255 || blue + changeBy < 0
+					? null
+					: setBlue(blue + changeBy);
+				break;
 		}
 	};
 	return (
@@ -26,13 +39,13 @@ const SquareScreen = function () {
 			/>
 			<ColorCounter
 				color="Green"
-				onIncrease={() => setGreen(green + changeBY)}
-				onDecrease={() => setGreen(green - changeBY)}
+				onIncrease={() => setColor('green', CHANGE_BY)}
+				onDecrease={() => setColor('green', -1 * CHANGE_BY)}
 			/>
 			<ColorCounter
 				color="Blue"
-				onIncrease={() => setBlue(blue + changeBY)}
-				onDecrease={() => setBlue(blue - changeBY)}
+				onIncrease={() => setColor('blue', CHANGE_BY)}
+				onDecrease={() => setColor('blue', -1 * CHANGE_BY)}
 			/>
 			<View
 				style={{
