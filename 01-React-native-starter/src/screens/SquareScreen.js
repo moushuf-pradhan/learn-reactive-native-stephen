@@ -5,47 +5,43 @@ import ColorCounter from '../components/ColorCounter';
 
 const CHANGE_BY = 15;
 
-const SquareScreen = function () {
-	const [red, setRed] = React.useState(0);
-	const [green, setGreen] = React.useState(0);
-	const [blue, setBlue] = React.useState(0);
+// Reducer function
+const reducer = (state, action) => {
+    // state === {red: number, green: number, blue: number}
+    // action === {colorToChange: 'red || 'green' || 'blue, amount: 15 || -15}
+    
+    switch (action.color) {
+        case 'red':
+            return {...state, red: state.red + action.amount};
+        case 'green':
+            return {...state, green: state.green + action.amount};
+        case 'blue':
+            return {...state, blue: state.blue + action.amount};
+        default:
+            return state;
+    }
+} 
 
-	// Set color
-	const setColor = (color, changeBy) => {
-		switch (color) {
-			case 'red':
-				red + changeBy > 255 || red + changeBy < 0
-					? null
-					: setRed(red + changeBy);
-				break;
-			case 'green':
-				green + changeBy > 255 || green + changeBy < 0
-					? null
-					: setGreen(green + changeBy);
-				break;
-			case 'blue':
-				blue + changeBy > 255 || blue + changeBy < 0
-					? null
-					: setBlue(blue + changeBy);
-				break;
-		}
-	};
+const SquareScreen = function () {
+
+	const [state, dispatch] = React.useReducer(reducer, {red: 0, green: 0, blue: 0});
+
 	return (
 		<View>
 			<ColorCounter
 				color="Red"
-				onIncrease={() => setColor('red', CHANGE_BY)}
-				onDecrease={() => setColor('red', -1 * CHANGE_BY)}
+				onIncrease={() => }
+				onDecrease={() => }
 			/>
 			<ColorCounter
 				color="Green"
-				onIncrease={() => setColor('green', CHANGE_BY)}
-				onDecrease={() => setColor('green', -1 * CHANGE_BY)}
+				onIncrease={() => }
+				onDecrease={() => }
 			/>
 			<ColorCounter
 				color="Blue"
-				onIncrease={() => setColor('blue', CHANGE_BY)}
-				onDecrease={() => setColor('blue', -1 * CHANGE_BY)}
+				onIncrease={() => }
+				onDecrease={() => }
 			/>
 			<View
 				style={{
