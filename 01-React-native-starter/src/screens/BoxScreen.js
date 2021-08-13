@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 	textTwo: {
 		borderWidth: 3,
 		borderColor: 'red',
-		top: 10,
+		...StyleSheet.absoluteFillObject,
 	},
 	textThree: {
 		borderWidth: 3,
