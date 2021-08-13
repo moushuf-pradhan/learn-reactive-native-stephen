@@ -3,32 +3,34 @@ import { Text, View, StyleSheet, TextInput } from 'react-native';
 
 export const BoxScreen = function () {
 	return (
-		<View style={styles.view}>
-			<Text style={styles.textOne}>Child #1</Text>
-			<Text style={styles.textTwo}>Child #2</Text>
-			<Text style={styles.textThree}>Child #3</Text>
+		<View style={styles.viewParent}>
+			<View style={styles.viewOne} />
+			<View style={styles.viewTwo} />
+			<View style={styles.viewThree} />
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	view: {
-		borderWidth: 3,
-		borderColor: 'black',
-		height: 200,
+	viewParent: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
 	},
-	textOne: {
-		borderWidth: 3,
-		borderColor: 'red',
+	viewOne: {
+		width: 80,
+		height: 80,
+		backgroundColor: 'red',
 	},
-	textTwo: {
-		borderWidth: 3,
-		borderColor: 'red',
-		...StyleSheet.absoluteFillObject,
+	viewTwo: {
+		width: 80,
+		height: 80,
+		backgroundColor: 'green',
+		top: 80,
 	},
-	textThree: {
-		borderWidth: 3,
-		borderColor: 'red',
+	viewThree: {
+		width: 80,
+		height: 80,
+		backgroundColor: 'blue',
 	},
 });
 
