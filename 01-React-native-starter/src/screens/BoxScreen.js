@@ -4,9 +4,9 @@ import { Text, View, StyleSheet, TextInput } from 'react-native';
 export const BoxScreen = function () {
 	return (
 		<View style={styles.view}>
-			<Text style={styles.text}>Child #1</Text>
-			<Text style={styles.text}>Child #2</Text>
-			<Text style={styles.text}>Child #3</Text>
+			<Text style={styles.textOne}>Child #1</Text>
+			<Text style={styles.textTwo}>Child #2</Text>
+			<Text style={styles.textThree}>Child #3</Text>
 		</View>
 	);
 };
@@ -16,11 +16,21 @@ const styles = StyleSheet.create({
 		borderWidth: 3,
 		borderColor: 'black',
 		height: 200,
-		flexDirection: 'row',
 	},
-	text: {
+	textOne: {
 		borderWidth: 3,
 		borderColor: 'red',
+		flex: 4,
+	},
+	textTwo: {
+		borderWidth: 3,
+		borderColor: 'red',
+		flex: 4,
+	},
+	textThree: {
+		borderWidth: 3,
+		borderColor: 'red',
+		flex: 2,
 	},
 });
 
