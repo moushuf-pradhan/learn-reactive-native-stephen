@@ -47,6 +47,18 @@ export default function IndexScreen(props) {
 	);
 }
 
+IndexScreen.navigationOptions = props => {
+	return {
+		headerRight: () => (
+			<TouchableOpacity
+				onPress={() => props.navigation.navigate('Create')}
+			>
+				<Feather name="plus" size={30} />
+			</TouchableOpacity>
+		),
+	};
+};
+
 const styles = StyleSheet.create({
 	row: {
 		flexDirection: 'row',
