@@ -13,6 +13,10 @@ const reducer = (state, action) => {
 			];
 		case 'delete_blog_post':
 			return state.filter(blog => blog.id !== action.payload);
+		case 'edit_blog_post':
+			return state.map(post =>
+				post.id === action.payload.id ? action.payload : post
+			);
 		default:
 			return state;
 	}
