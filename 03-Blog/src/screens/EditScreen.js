@@ -15,7 +15,9 @@ export default function EditScreen(props) {
 	return (
 		<BlogPostForm
 			initialValues={{ title: post.title, content: post.content }}
-			onSubmit={(title, content) => editBlogPost(id, title, content)}
+			onSubmit={(title, content) =>
+				editBlogPost(id, title, content, () => props.navigation.pop())
+			}
 		/>
 	);
 }
