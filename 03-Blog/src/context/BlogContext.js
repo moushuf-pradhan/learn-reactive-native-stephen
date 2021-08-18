@@ -33,8 +33,15 @@ const deleteBlogPost = dispatch => {
 	};
 };
 
+// Edit a blog post
+const editBlogPost = dispatch => {
+	return (id, title, content) => {
+		dispatch({ type: 'edit_blog_post', payload: { id, title, content } });
+	};
+};
+
 export const { Context, Provider } = createDataContext(
 	reducer,
-	{ addBlogPost, deleteBlogPost },
+	{ addBlogPost, deleteBlogPost, editBlogPost },
 	[{ title: 'Test post', content: 'Blah Blah Blah', id: 1 }]
 );
