@@ -12,7 +12,8 @@ import { Context as BlogContext } from '../context/BlogContext';
 import { Feather } from '@expo/vector-icons';
 
 export default function IndexScreen() {
-	const { state, addBlogPost } = React.useContext(BlogContext);
+	const { state, addBlogPost, deleteBlogPost } =
+		React.useContext(BlogContext);
 	return (
 		<View>
 			<Button title="Add post" onPress={addBlogPost} />
@@ -26,7 +27,7 @@ export default function IndexScreen() {
 								{item.title} - {item.id}
 							</Text>
 							<TouchableOpacity
-								onPress={() => console.log(item.id)}
+								onPress={() => deleteBlogPost(item.id)}
 							>
 								<Feather style={styles.icon} name="trash" />
 							</TouchableOpacity>
