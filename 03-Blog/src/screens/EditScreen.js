@@ -4,20 +4,24 @@ import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import { Context as BlogContext } from '../context/BlogContext';
 
 export default function EditScreen(props) {
-	// Local states
-	const [title, setTitle] = React.useState('');
-	const [content, setContent] = React.useState('');
 	// Destructuring context
-	const { addBlogPost } = React.useContext(BlogContext);
+	const { state } = React.useContext(BlogContext);
+	// Selected post
+	const post = state.find(
+		post => post.id === props.navigation.getParam('id')
+	);
+	// Local states
+	const [title, setTitle] = React.useState(post.title);
+	const [content, setContent] = React.useState(post.content);
 	return (
 		<View>
-			<Text style={styles.label}>Enter title:</Text>
+			<Text style={styles.label}>Edit title:</Text>
 			<TextInput
 				style={styles.input}
 				value={title}
 				onChangeText={val => setTitle(val)}
 			/>
-			<Text style={styles.label}>Enter content:</Text>
+			<Text style={styles.label}>Edit content:</Text>
 			<TextInput
 				style={styles.input}
 				value={content}
@@ -25,11 +29,11 @@ export default function EditScreen(props) {
 			/>
 			<Button
 				title="Save"
-				onPress={() => {
-					addBlogPost(title, content, function () {
-						props.navigation.navigate('Index');
-					});
-				}}
+				// onPress={() => {
+				// 	addBlogPost(title, content, function () {
+				// 		props.navigation.navigate('Index');
+				// 	});
+				// }}
 			/>
 		</View>
 	);

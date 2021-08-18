@@ -22,9 +22,10 @@ ShowScreen.navigationOptions = props => {
 	return {
 		headerRight: () => (
 			<TouchableOpacity
-				onPress={
-					(() => props.navigation.navigate('Edit'),
-					{ id: props.navigation.getParam('id') })
+				onPress={() =>
+					props.navigation.navigate('Edit', {
+						id: props.navigation.getParam('id'),
+					})
 				}
 			>
 				<EvilIcons name="pencil" size={35} />
