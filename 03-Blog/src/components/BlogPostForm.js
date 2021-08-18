@@ -3,10 +3,8 @@ import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 
 export default function BlogPostForm(props) {
 	// Local states
-	const [title, setTitle] = React.useState(props.initialValues.title || '');
-	const [content, setContent] = React.useState(
-		props.initialValues.content || ''
-	);
+	const [title, setTitle] = React.useState(props.initialValues.title);
+	const [content, setContent] = React.useState(props.initialValues.content);
 	return (
 		<View>
 			<Text style={styles.label}>Enter title:</Text>
@@ -28,6 +26,13 @@ export default function BlogPostForm(props) {
 		</View>
 	);
 }
+
+BlogPostForm.defaultProps = {
+	initialValues: {
+		title: '',
+		content: '',
+	},
+};
 
 const styles = StyleSheet.create({
 	input: {
