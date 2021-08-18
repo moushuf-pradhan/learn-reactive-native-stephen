@@ -12,5 +12,10 @@ export default function EditScreen(props) {
 	const post = state.find(
 		post => post.id === props.navigation.getParam('id')
 	);
-	return <BlogPostForm />;
+	return (
+		<BlogPostForm
+			initialValues={{ title: post.title, content: post.content }}
+			onSubmit={(title, content) => console.log(title, content)}
+		/>
+	);
 }
