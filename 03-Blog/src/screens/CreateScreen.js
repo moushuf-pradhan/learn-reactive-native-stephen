@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 // Import context
 import { Context as BlogContext } from '../context/BlogContext';
 
-export default function CreateScreen() {
+export default function CreateScreen(props) {
 	// Local states
 	const [title, setTitle] = React.useState('');
 	const [content, setContent] = React.useState('');
@@ -25,7 +25,11 @@ export default function CreateScreen() {
 			/>
 			<Button
 				title="Add a blog post"
-				onPress={() => addBlogPost(title, content)}
+				onPress={() => {
+					addBlogPost(title, content, function () {
+						props.navigation.navigate('Index');
+					});
+				}}
 			/>
 		</View>
 	);
