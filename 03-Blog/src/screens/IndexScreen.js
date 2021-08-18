@@ -11,7 +11,7 @@ import { Context as BlogContext } from '../context/BlogContext';
 // Import icons
 import { Feather } from '@expo/vector-icons';
 
-export default function IndexScreen() {
+export default function IndexScreen(props) {
 	const { state, addBlogPost, deleteBlogPost } =
 		React.useContext(BlogContext);
 	return (
@@ -22,16 +22,24 @@ export default function IndexScreen() {
 				keyExtractor={post => post.title}
 				renderItem={({ item }) => {
 					return (
-						<View style={styles.row}>
-							<Text style={styles.title}>
-								{item.title} - {item.id}
-							</Text>
-							<TouchableOpacity
-								onPress={() => deleteBlogPost(item.id)}
-							>
-								<Feather style={styles.icon} name="trash" />
-							</TouchableOpacity>
-						</View>
+						<TouchableOpacity
+							onPress={() =>
+								props.navigation.navigate('Show', {
+									id: item.id,
+								})
+							}
+						>
+							<View style={styles.row}>
+								<Text style={styles.title}>
+									{item.title} - {item.id}
+								</Text>
+								<TouchableOpacity
+									onPress={() => deleteBlogPost(item.id)}
+								>
+									<Feather style={styles.icon} name="trash" />
+								</TouchableOpacity>
+							</View>
+						</TouchableOpacity>
 					);
 				}}
 			/>
