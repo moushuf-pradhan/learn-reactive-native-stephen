@@ -8,5 +8,13 @@ import BlogPostForm from '../components/BlogPostForm';
 export default function CreateScreen(props) {
 	// Destructuring context
 	const { addBlogPost } = React.useContext(BlogContext);
-	return <BlogPostForm />;
+	return (
+		<BlogPostForm
+			onSubmit={(title, content) =>
+				addBlogPost(title, content, () =>
+					props.navigation.navigate('Index')
+				)
+			}
+		/>
+	);
 }

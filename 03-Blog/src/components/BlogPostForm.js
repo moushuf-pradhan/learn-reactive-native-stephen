@@ -21,11 +21,7 @@ export default function BlogPostForm(props) {
 			/>
 			<Button
 				title="Add a blog post"
-				onPress={() => {
-					addBlogPost(title, content, function () {
-						props.navigation.navigate('Index');
-					});
-				}}
+				onPress={() => props.onSubmit(title, content)}
 			/>
 		</View>
 	);
