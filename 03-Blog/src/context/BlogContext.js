@@ -1,7 +1,11 @@
 import createDataContext from './createDataContext';
+// Import axios instance
+import blogAxios from '../api/jsonServer';
 
 const reducer = (state, action) => {
 	switch (action.type) {
+		case 'fetch_blog_posts':
+			return action.payload;
 		case 'add_blog_post':
 			return [
 				...state,
@@ -20,6 +24,12 @@ const reducer = (state, action) => {
 		default:
 			return state;
 	}
+};
+
+// Fetch blog posts
+const fetchBlogPosts = async dispatch => {
+	const res = await blogAxios.get('/blogPosts');
+	dispatch({ type: 'fetch_blog_posts', payload: res.data });
 };
 
 // Add a blog post
@@ -47,6 +57,6 @@ const editBlogPost = dispatch => {
 
 export const { Context, Provider } = createDataContext(
 	reducer,
-	{ addBlogPost, deleteBlogPost, editBlogPost },
-	[{ title: 'Test post', content: 'Blah Blah Blah', id: 1 }]
+	{ fetchBlogPosts, addBlogPost, deleteBlogPost, editBlogPost },
+	[]
 );
