@@ -6,15 +6,6 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case 'fetch_blog_posts':
 			return action.payload;
-		case 'add_blog_post':
-			return [
-				...state,
-				{
-					id: Math.floor(Math.random() * 99999),
-					title: action.payload.title,
-					content: action.payload.content,
-				},
-			];
 		case 'delete_blog_post':
 			return state.filter(blog => blog.id !== action.payload);
 		case 'edit_blog_post':
@@ -38,14 +29,14 @@ const fetchBlogPosts = dispatch => {
 const addBlogPost = dispatch => {
 	return async (title, content, callback) => {
 		await blogAxios.post('/blogPosts', { title, content });
-		// dispatch({ type: 'add_blog_post', payload: { title, content } });
 		if (callback) callback();
 	};
 };
 
 // Delete a blog post
 const deleteBlogPost = dispatch => {
-	return id => {
+	return async id => {
+		await blogAxios.delete(`/blogPosts/${id}`);
 		dispatch({ type: 'delete_blog_post', payload: id });
 	};
 };
