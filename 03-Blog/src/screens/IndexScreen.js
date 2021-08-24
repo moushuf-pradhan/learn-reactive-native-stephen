@@ -18,6 +18,13 @@ export default function IndexScreen(props) {
 	// On component mount
 	React.useEffect(() => {
 		fetchBlogPosts();
+		const listener = props.navigation.addListener('didFocus', () => {
+			fetchBlogPosts();
+		});
+
+		return () => {
+			listener.remove();
+		};
 	}, []);
 	return (
 		<View>
