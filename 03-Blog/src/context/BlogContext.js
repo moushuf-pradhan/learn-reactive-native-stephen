@@ -36,8 +36,9 @@ const fetchBlogPosts = dispatch => {
 
 // Add a blog post
 const addBlogPost = dispatch => {
-	return (title, content, callback) => {
-		dispatch({ type: 'add_blog_post', payload: { title, content } });
+	return async (title, content, callback) => {
+		await blogAxios.post('/blogPosts', { title, content });
+		// dispatch({ type: 'add_blog_post', payload: { title, content } });
 		if (callback) callback();
 	};
 };
