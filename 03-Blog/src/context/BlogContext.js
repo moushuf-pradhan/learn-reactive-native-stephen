@@ -27,9 +27,11 @@ const reducer = (state, action) => {
 };
 
 // Fetch blog posts
-const fetchBlogPosts = async dispatch => {
-	const res = await blogAxios.get('/blogPosts');
-	dispatch({ type: 'fetch_blog_posts', payload: res.data });
+const fetchBlogPosts = dispatch => {
+	return async () => {
+		const res = await blogAxios.get('/blogPosts');
+		dispatch({ type: 'fetch_blog_posts', payload: res.data });
+	};
 };
 
 // Add a blog post

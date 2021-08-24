@@ -12,7 +12,13 @@ import { Context as BlogContext } from '../context/BlogContext';
 import { Feather } from '@expo/vector-icons';
 
 export default function IndexScreen(props) {
-	const { state, deleteBlogPost } = React.useContext(BlogContext);
+	const { state, deleteBlogPost, fetchBlogPosts } =
+		React.useContext(BlogContext);
+
+	// On component mount
+	React.useEffect(() => {
+		fetchBlogPosts();
+	}, []);
 	return (
 		<View>
 			<FlatList
