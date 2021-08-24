@@ -43,7 +43,8 @@ const deleteBlogPost = dispatch => {
 
 // Edit a blog post
 const editBlogPost = dispatch => {
-	return (id, title, content, callback) => {
+	return async (id, title, content, callback) => {
+		await blogAxios.put(`/blogPosts/${id}`, { title, content });
 		dispatch({ type: 'edit_blog_post', payload: { id, title, content } });
 		if (callback) callback();
 	};
