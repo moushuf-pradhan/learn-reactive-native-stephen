@@ -1,4 +1,5 @@
 // Imports
+require('./models/user');
 const authRoutes = require('./routes/authRoutes');
 const express = require('express');
 const mongoose = require('mongoose');
