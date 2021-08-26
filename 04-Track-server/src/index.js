@@ -2,10 +2,14 @@
 const authRoutes = require('./routes/authRoutes');
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 // Create an app object
 const app = express();
 
+// Handle JSON data
+app.use(bodyParser.json());
+// Handle routes
 app.use(authRoutes);
 
 // Mongo URI
