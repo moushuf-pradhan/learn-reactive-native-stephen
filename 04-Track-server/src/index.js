@@ -1,7 +1,8 @@
+// Imports
+const authRoutes = require('./routes/authRoutes');
 const express = require('express');
 const mongoose = require('mongoose');
-// Imports
-import authRoutes from './routes/authRoutes';
+
 // Create an app object
 const app = express();
 
