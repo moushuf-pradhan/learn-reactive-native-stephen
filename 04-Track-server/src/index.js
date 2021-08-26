@@ -1,7 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
+// Imports
+import authRoutes from './routes/authRoutes';
 // Create an app object
 const app = express();
+
+app.use(authRoutes);
 
 // Mongo URI
 const mongoURI =
