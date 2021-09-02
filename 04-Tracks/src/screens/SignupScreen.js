@@ -7,6 +7,9 @@ import { Text, Input, Button } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 
 export default function SignupScreen(props) {
+	// Local states
+	const [email, setEmail] = React.useState('');
+	const [password, setPassword] = React.useState('');
 	return (
 		<View style={styles.container}>
 			<Spacer>
@@ -14,9 +17,22 @@ export default function SignupScreen(props) {
 					Sign up for Tracker
 				</Text>
 			</Spacer>
-			<Input label="Email" />
+			<Input
+				label="Email"
+				value={email}
+				onChangeText={setEmail}
+				autoCapitalize="none"
+				autoCorrect={false}
+			/>
 			<Spacer />
-			<Input label="Password" />
+			<Input
+				secureTextEntry
+				label="Password"
+				value={password}
+				onChangeText={setPassword}
+				autoCapitalize="none"
+				autoCorrect={false}
+			/>
 			<Spacer>
 				<Button title="Sign up" />
 			</Spacer>
@@ -33,8 +49,7 @@ SignupScreen.navigationOptions = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		justifyContent: 'center',
+		marginTop: 75,
 		marginBottom: 150,
 	},
 	authHeading: {
