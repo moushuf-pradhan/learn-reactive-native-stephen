@@ -8,7 +8,7 @@ import Spacer from '../components/Spacer';
 
 export default function SignupScreen(props) {
 	return (
-		<>
+		<View style={styles.container}>
 			<Spacer>
 				<Text h3 style={styles.authHeading}>
 					Sign up for Tracker
@@ -20,11 +20,23 @@ export default function SignupScreen(props) {
 			<Spacer>
 				<Button title="Sign up" />
 			</Spacer>
-		</>
+		</View>
 	);
 }
 
+// Hide screen header
+SignupScreen.navigationOptions = () => {
+	return {
+		headerShown: false,
+	};
+};
+
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		marginBottom: 150,
+	},
 	authHeading: {
 		marginBottom: 40,
 	},
