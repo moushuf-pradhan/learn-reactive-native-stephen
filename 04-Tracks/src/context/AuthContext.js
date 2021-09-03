@@ -1,4 +1,6 @@
 import createDataContext from './createDataContext';
+// Import axios instance
+import trackerAxios from '../api/trackerAxios';
 
 const authReducer = (state, action) => {
 	switch (action.type) {
@@ -9,7 +11,16 @@ const authReducer = (state, action) => {
 
 // Sign up
 const signup = dispatch => {
-	return ({ email, password }) => {
+	return async ({ email, password }) => {
+		try {
+			const response = await trackerAxios.post('/signup', {
+				email,
+				password,
+			});
+			console.log(response.data);
+		} catch (err) {
+			console.log(err.message);
+		}
 		// Make API request to signup using the email and password
 		// If we signup, modify our state and say that we are authenticated
 		// If signup fails, reflect an error message somewhere

@@ -5,11 +5,16 @@ import { StyleSheet, View } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 // Import components
 import Spacer from '../components/Spacer';
+// Import context
+import { Context as AuthContext } from '../context/AuthContext';
 
 export default function SignupScreen(props) {
 	// Local states
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
+
+	// Destructuring AuthContext
+	const { state, signup } = React.useContext(AuthContext);
 	return (
 		<View style={styles.container}>
 			<Spacer>
@@ -34,7 +39,10 @@ export default function SignupScreen(props) {
 				autoCorrect={false}
 			/>
 			<Spacer>
-				<Button title="Sign up" />
+				<Button
+					title="Sign up"
+					onPress={() => signup({ email, password })}
+				/>
 			</Spacer>
 		</View>
 	);
