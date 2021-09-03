@@ -4,11 +4,16 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 // Import components
 import Spacer from '../components/Spacer';
+// Import context
+import { Context as AuthContext } from '../context/AuthContext';
 
 export default function AuthForm(props) {
 	// Local states
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
+
+	// Destructuring Context
+	const { state } = React.useContext(AuthContext);
 	return (
 		<View style={styles.container}>
 			<Spacer>
@@ -39,6 +44,7 @@ export default function AuthForm(props) {
 				<Button
 					title={props.submitBtnText}
 					onPress={() => props.onSubmit({ email, password })}
+					loading={state.isLoading}
 				/>
 			</Spacer>
 			<Spacer />

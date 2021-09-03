@@ -12,8 +12,10 @@ const authReducer = (state, action) => {
 			return { ...state, errorMessage: action.payload };
 		case 'remove_error':
 			return { ...state, errorMessage: '' };
-		case 'signup':
+		case 'signin':
 			return { ...state, token: action.payload, errorMessage: '' };
+		case 'set_loading':
+			return { ...state, isLoading: action.payload };
 		default:
 			return state;
 	}
@@ -25,12 +27,13 @@ const signup =
 	async ({ email, password }) => {
 		try {
 			dispatch({ type: 'remove_error' });
+			dispatch({ type: 'set_loading', payload: true });
 			const response = await trackerAxios.post('/signup', {
 				email,
 				password,
 			});
 			await AsyncStorage.setItem('token', response.data.token);
-			dispatch({ type: 'signup', payload: response.data.token });
+			dispatch({ type: 'signin', payload: response.data.token });
 			// Navigate
 			navigate('TrackList');
 		} catch (err) {
@@ -39,15 +42,32 @@ const signup =
 				type: 'add_error',
 				payload: 'Something went wrong with sign up',
 			});
+		} finally {
+			dispatch({ type: 'set_loading', payload: false });
 		}
 	};
 
 // Sign in
 const signin = dispatch => {
-	return ({ email, password }) => {
-		// Try to sign in
-		// Handle success by updating state
-		// Handle failure by showing error message
+	return async ({ email, password }) => {
+		try {
+			dispatch({ type: 'set_loading', payload: true });
+			const response = await trackerAxios.post('/signin', {
+				email,
+				password,
+			});
+			console.log(response.message);
+			await AsyncStorage.setItem('token', response.data.token);
+			dispatch({ type: 'signin', payload: response.data.token });
+			props.navigation.navigate('Signin');
+		} catch (err) {
+			dispatch({
+				type: 'add_error',
+				payload: 'Something went wrong while signing in',
+			});
+		} finally {
+			dispatch({ type: 'set_loading', payload: false });
+		}
 	};
 };
 
@@ -61,5 +81,5 @@ const signout = dispatch => {
 export const { Provider, Context } = createDataContext(
 	authReducer,
 	{ signup, signin, signout },
-	{ token: null, errorMessage: '' }
+	{ token: null, errorMessage: '', isLoading: false }
 );
