@@ -10,6 +10,8 @@ const authReducer = (state, action) => {
 	switch (action.type) {
 		case 'add_error':
 			return { ...state, errorMessage: action.payload };
+		case 'remove_error':
+			return { ...state, errorMessage: '' };
 		case 'signup':
 			return { ...state, token: action.payload, errorMessage: '' };
 		default:
@@ -22,6 +24,7 @@ const signup =
 	dispatch =>
 	async ({ email, password }) => {
 		try {
+			dispatch({ type: 'remove_error' });
 			const response = await trackerAxios.post('/signup', {
 				email,
 				password,
@@ -31,6 +34,7 @@ const signup =
 			// Navigate
 			navigate('TrackList');
 		} catch (err) {
+			console.log(err.message);
 			dispatch({
 				type: 'add_error',
 				payload: 'Something went wrong with sign up',
