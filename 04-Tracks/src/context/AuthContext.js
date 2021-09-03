@@ -10,7 +10,7 @@ const authReducer = (state, action) => {
 	switch (action.type) {
 		case 'add_error':
 			return { ...state, errorMessage: action.payload };
-		case 'remove_error':
+		case 'clear_error':
 			return { ...state, errorMessage: '' };
 		case 'signin':
 			return { ...state, token: action.payload, errorMessage: '' };
@@ -26,7 +26,7 @@ const signup =
 	dispatch =>
 	async ({ email, password }) => {
 		try {
-			dispatch({ type: 'remove_error' });
+			dispatch({ type: 'clear_error' });
 			dispatch({ type: 'set_loading', payload: true });
 			const response = await trackerAxios.post('/signup', {
 				email,
@@ -56,11 +56,11 @@ const signin = dispatch => {
 				email,
 				password,
 			});
-			console.log(response.message);
 			await AsyncStorage.setItem('token', response.data.token);
 			dispatch({ type: 'signin', payload: response.data.token });
-			props.navigation.navigate('Signin');
+			navigate('TrackList');
 		} catch (err) {
+			console.log(err);
 			dispatch({
 				type: 'add_error',
 				payload: 'Something went wrong while signing in',
@@ -78,8 +78,15 @@ const signout = dispatch => {
 	};
 };
 
+// Clear error message
+const clearErrorMessage = dispatch => {
+	return () => {
+		dispatch({ type: 'clear_error' });
+	};
+};
+
 export const { Provider, Context } = createDataContext(
 	authReducer,
-	{ signup, signin, signout },
+	{ signup, signin, signout, clearErrorMessage },
 	{ token: null, errorMessage: '', isLoading: false }
 );
