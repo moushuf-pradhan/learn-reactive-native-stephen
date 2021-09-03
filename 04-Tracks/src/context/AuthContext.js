@@ -1,6 +1,8 @@
 import createDataContext from './createDataContext';
 // Import axios instance
 import trackerAxios from '../api/trackerAxios';
+// Import from Navigation ref
+import { navigate } from '../navigationRef';
 // Import from Async storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -26,6 +28,8 @@ const signup =
 			});
 			await AsyncStorage.setItem('token', response.data.token);
 			dispatch({ type: 'signup', payload: response.data.token });
+			// Navigate
+			navigate('TrackList');
 		} catch (err) {
 			dispatch({
 				type: 'add_error',

@@ -5,6 +5,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 // Import Provider
 import { Provider as AuthProvider } from './src/context/AuthContext';
+// Import setNavigator
+import { setNavigator } from './src/navigationRef';
 // Import components
 import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
@@ -33,7 +35,7 @@ const App = createAppContainer(switchNavigator);
 export default () => {
 	return (
 		<AuthProvider>
-			<App />
+			<App ref={navigator => setNavigator(navigator)} />
 		</AuthProvider>
 	);
 };
