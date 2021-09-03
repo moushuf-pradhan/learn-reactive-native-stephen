@@ -1,6 +1,6 @@
 import React from 'react';
 // Import from React native
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 // Import from React native elements
 import { Text, Input, Button } from 'react-native-elements';
 // Import components
@@ -47,6 +47,16 @@ export default function SignupScreen(props) {
 					onPress={() => signup({ email, password })}
 				/>
 			</Spacer>
+			<Spacer />
+			<TouchableOpacity
+				onPress={() => props.navigation.navigate('Signin')}
+			>
+				<Spacer>
+					<Text style={styles.link}>
+						Already have an account? Sign in instead.
+					</Text>
+				</Spacer>
+			</TouchableOpacity>
 		</View>
 	);
 }
@@ -71,5 +81,8 @@ const styles = StyleSheet.create({
 		color: 'red',
 		marginHorizontal: 10,
 		marginBottom: 10,
+	},
+	link: {
+		color: 'blue',
 	},
 });
