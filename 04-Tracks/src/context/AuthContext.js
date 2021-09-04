@@ -85,8 +85,21 @@ const clearErrorMessage = dispatch => {
 	};
 };
 
+// Try local sign in
+const tryLocalSignin = dispatch => {
+	return async () => {
+		const token = await AsyncStorage.getItem('token');
+		if (token) {
+			dispatch({ type: 'signin', payload: token });
+			navigate('TrackList');
+		} else {
+			navigate('Signin');
+		}
+	};
+};
+
 export const { Provider, Context } = createDataContext(
 	authReducer,
-	{ signup, signin, signout, clearErrorMessage },
+	{ signup, signin, signout, clearErrorMessage, tryLocalSignin },
 	{ token: null, errorMessage: '', isLoading: false }
 );

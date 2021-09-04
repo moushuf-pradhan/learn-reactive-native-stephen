@@ -9,7 +9,13 @@ import { Context as AuthContext } from '../context/AuthContext';
 
 export default function SignupScreen(props) {
 	// Destructuring AuthContext
-	const { state, signup, clearErrorMessage } = React.useContext(AuthContext);
+	const { state, signup, clearErrorMessage, tryLocalSignin } =
+		React.useContext(AuthContext);
+
+	// On component mount
+	React.useEffect(() => {
+		tryLocalSignin();
+	}, []);
 	return (
 		<>
 			<NavigationEvents onWillFocus={clearErrorMessage} />
